@@ -5,8 +5,10 @@
   "author": "Wes Bos",
   "license": "MIT",
   "scripts": {
+    "start": "keystone-next start",
     "dev": "keystone-next",
-    "seed-data": "keystone-next --seed-data"
+    "seed-data": "keystone-next --seed-data",
+    "build": "keystone-next build"
   },
   "eslintConfig": {
     "extends": "wesbos/typescript.js",
