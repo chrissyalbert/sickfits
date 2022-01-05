@@ -38,14 +38,12 @@ export default function UpdateProduct({ id }) {
   const { data, error, loading } = useQuery(SINGLE_PRODUCT_QUERY, {
     variables: { id },
   });
-  console.log(data);
 
   const [
     updateProduct,
     { data: updateDate, error: updateError, loading: updateLoading },
   ] = useMutation(UPDATE_PRODUCT_MUTATION);
   const { inputs, handleChange, resetForm, clearForm } = useForm(data?.Product);
-  console.log(inputs);
   if (loading) return <p>Loading...</p>;
   return (
     <Form
@@ -61,13 +59,6 @@ export default function UpdateProduct({ id }) {
             // TODO pass in updates to product here
           },
         }).catch(console.error);
-        console.log(res);
-        // submit the input fields to the backend:
-        // const res = await createProduct();
-        // clearForm();
-        // Router.push({
-        //   pathname: `/product/${res.data.createProduct.id}`,
-        // });
       }}
     >
       <DisplayError error={error || updateError} />
