@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import Nav from './Nav';
 import Cart from './Cart';
 import Search from './Search';
@@ -33,6 +34,17 @@ const HeaderStyles = styled.header`
   }
 `;
 
+function ClientOnly({ children, ...delegated }) {
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
+  return <div {...delegated}>{children}</div>;
+}
+
 export default function Header() {
   return (
     <HeaderStyles>
@@ -43,7 +55,9 @@ export default function Header() {
         <Nav />
       </div>
       <div className="sub-bar">
-        <Search />
+        <ClientOnly>
+          <Search />
+        </ClientOnly>
       </div>
       <Cart />
     </HeaderStyles>
